@@ -2,14 +2,67 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>CPS Agent Orchestrator</title>
+<style>
+  :root { color-scheme: light dark; }
+  body {
+    max-width: 46rem; margin: 0 auto; padding: 2.5rem 1.25rem 4rem;
+    font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  }
+  h1 { font-size: 1.75rem; margin-bottom: .25rem; }
+  h2 { font-size: 1.1rem; margin-top: 2rem; }
+  .tagline { font-size: 1.05rem; opacity: .75; margin-top: 0; }
+  .note { border-left: 3px solid currentColor; padding-left: 1rem; opacity: .8; }
+  footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid; border-color: color-mix(in srgb, currentColor 25%, transparent); }
+  ul { padding-left: 1.25rem; }
+</style>
 </head>
 <body>
+
 <h1>CPS Agent Orchestrator</h1>
-<p>Personal software project by a solo developer.</p>
+<p class="tagline">A desktop tool that uses local AI to generate short marketing videos and post
+them to your own TikTok account.</p>
+
+<h2>What it is</h2>
+<p>CPS Agent Orchestrator is a personal software project built and run by a solo developer. It is a
+desktop application (C# / .NET 8, Windows) that runs entirely on the operator's own machine. It is
+not a hosted service, has no public sign-up, and has no users other than its developer.</p>
+
+<h2>How it works</h2>
 <ul>
-<li><a href="tos.html">Terms of Service</a></li>
-<li><a href="privacy.html">Privacy Policy</a></li>
+  <li>Locally-hosted AI models (Ollama, LM Studio, or llama.cpp) select affiliate products and
+      draft short-video scripts. No cloud model APIs are used.</li>
+  <li>A local rendering step turns a script into a finished video: Windows text-to-speech for
+      narration, composited with FFmpeg into a 1080&times;1920 H.264/AAC MP4.</li>
+  <li>The operator reviews the result in a local dashboard and may then choose to publish it to
+      their own connected TikTok account.</li>
 </ul>
+
+<h2>TikTok integration</h2>
+<ul>
+  <li><strong>Login Kit</strong> &mdash; the operator connects their own TikTok account through
+      TikTok's standard OAuth 2.0 authorization flow (with PKCE). Access and refresh tokens are
+      stored only on the operator's local machine.</li>
+  <li><strong>Content Posting API</strong> &mdash; a reviewed video is uploaded and posted to that
+      same account.</li>
+</ul>
+<p class="note">Every post is triggered manually by the operator from the dashboard. Nothing is
+scheduled, queued, or published automatically, and posts are made at private
+(<code>SELF_ONLY</code>) visibility.</p>
+
+<h2>Data handling</h2>
+<p>The application does not collect, store, or share data belonging to any third party. Generated
+scripts and video files stay on the operator's own machine. No analytics, tracking, or advertising
+services are used. The only external service contacted is TikTok's own API, and only to perform a
+publishing action the operator has explicitly requested.</p>
+
+<footer>
+<ul>
+  <li><a href="tos.html/">Terms of Service</a></li>
+  <li><a href="privacy.html/">Privacy Policy</a></li>
+</ul>
+</footer>
+
 </body>
 </html>
